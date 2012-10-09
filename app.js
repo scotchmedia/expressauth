@@ -8,7 +8,9 @@ var express = require('express');
 var routes = require('./routes');
 var user = require('./routes/user');
 var http = require('http');
+var mongoose = require('mongoose');
 var path = require('path');
+var config = require('./config');
 
 var app = express();
 
@@ -16,6 +18,10 @@ app.configure(function () {
   app.set('port', process.env.PORT || 3000);
   app.set('views', __dirname + '/views');
   app.set('view engine', 'jade');
+  // tell mongoose to connect to the `dbUrl` that corresponse to the
+  // environment we are in.
+  app.set('dbUrl', config.db[app.settings.env]);
+  mongoose.connect(app.get('dbUrl'));
   app.use(express.favicon());
   app.use(express.logger('dev'));
   app.use(express.bodyParser());
