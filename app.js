@@ -18,9 +18,10 @@ app.configure(function () {
   app.set('port', process.env.PORT || 3000);
   app.set('views', __dirname + '/views');
   app.set('view engine', 'jade');
-  // tell mongoose to connect to the `dbUrl` that corresponse to the
-  // environment we are in.
+  // set the 'dbUrl' to the mongodb url that corresponds to the
+  // environment we are in
   app.set('dbUrl', config.db[app.settings.env]);
+  // connect mongoose to the mongo dbUrl
   mongoose.connect(app.get('dbUrl'));
   app.use(express.favicon());
   app.use(express.logger('dev'));
