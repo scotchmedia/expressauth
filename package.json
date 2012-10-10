@@ -7,10 +7,11 @@
     "test": "node_modules/.bin/mocha -w"
   },
   "dependencies": {
+    "bcrypt": "0.7.x",
     "express": "3.0.0rc4",
-    "supervisor": "0.4.x",
+    "jade": "*",
     "mongoose": "3.x.x",
-    "jade": "*"
+    "supervisor": "0.4.x"
   },
   "devDependencies": {
     "mocha": "*",
