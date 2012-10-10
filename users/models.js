@@ -37,5 +37,10 @@ userSchema.statics.hashPassword = function (passwordRaw, fn) {
   bcrypt.hash(passwordRaw, BCRYPT_COST, fn);
 };
 
+userSchema.statics.comparePasswordAndHash = function (password, passwordHash, fn) {
+  // compare the password to the passwordHash
+  bcrypt.compare(password, passwordHash, fn);
+};
+
 // Export the User model
 exports.User = mongoose.model('User', userSchema);
