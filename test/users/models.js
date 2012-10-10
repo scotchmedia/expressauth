@@ -45,4 +45,19 @@ describe('Users: models', function () {
     });
   });
 
+  describe('#hashPassoword()', function () {
+    it('should return a hashed password asyncchronously', function (done) {
+
+      var password = 'secret';
+
+      User.hashPassword(password, function (err, passwordHash) {
+        // Confirm that that an error does not exist
+        should.not.exist(err);
+        // Confirm that the passwordHash is not null
+        should.exist(passwordHash);
+        done();
+      });
+    });
+  });
+
 });
