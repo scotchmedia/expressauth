@@ -40,6 +40,12 @@ app.configure('development', function () {
 app.get('/', routes.index);
 app.get('/users', user.list);
 
+app.get('/add/:first/:second', function (req, res) {
+  // convert the two values to floats and add them together
+  var sum = parseFloat(req.params.first) + parseFloat(req.params.second);
+  res.send(200, String(sum));
+});
+
 http.createServer(app).listen(app.get('port'), function () {
   console.log("Express server listening on port " + app.get('port'));
 });
