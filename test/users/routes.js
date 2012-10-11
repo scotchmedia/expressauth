@@ -5,7 +5,7 @@ var utils = require('../utils');
 var request = require('supertest');
 var should = require('should');
 var app = require('../../app').app;
-
+var User = require('../../users/models').User;
 
 describe('Users: routes', function () {
   describe('POST /signup', function () {
@@ -43,6 +43,25 @@ describe('Users: routes', function () {
           // confirm the redirect
           res.header.location.should.include('/signup');
           done();
+        });
+    });
+    it('should create a new User if the form is valid', function (done) {
+      var post = {
+        givenName: 'Barrack',
+        familyName: 'Obama',
+        email: 'berry@example.com',
+        password: 'secret'
+      };
+      request(app)
+        .post('/signup')
+        .send(post)
+        .expect(302)
+        .end(function (err, res) {
+          should.not.exist(err);
+          User.find(function (err, u) {
+            u.length.should.equal(1);
+            done();
+          });
         });
     });
   });
