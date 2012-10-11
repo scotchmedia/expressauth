@@ -9,9 +9,11 @@
   "dependencies": {
     "bcrypt": "0.7.x",
     "express": "3.0.0rc4",
+    "express-validator": "0.3.x",
     "jade": "*",
     "mongoose": "3.x.x",
-    "supervisor": "0.4.x"
+    "supervisor": "0.4.x",
+    "validator": "0.4.12"
   },
   "devDependencies": {
     "mocha": "*",
