@@ -11,6 +11,7 @@ var http = require('http');
 var mongoose = require('mongoose');
 var path = require('path');
 var config = require('./config');
+var expressValidator = require('express-validator');
 
 var app = exports.app = express();
 
@@ -29,6 +30,9 @@ app.configure(function () {
   app.use(express.methodOverride());
   app.use(express.cookieParser('your secret here'));
   app.use(express.session());
+  // add the express-validator middleware. 
+  // Important: This must come before the app.router middleware
+  app.use(expressValidator);
   app.use(app.router);
   app.use(express.static(path.join(__dirname, 'public')));
 });
