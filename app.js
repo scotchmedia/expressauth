@@ -6,7 +6,7 @@
 
 var express = require('express');
 var routes = require('./routes');
-var user = require('./routes/user');
+var users = require('./users/routes');
 var http = require('http');
 var mongoose = require('mongoose');
 var path = require('path');
@@ -42,7 +42,7 @@ app.configure('development', function () {
 });
 
 app.get('/', routes.index);
-app.get('/users', user.list);
+app.post('/signup', users.signup);
 
 app.get('/add/:first/:second', function (req, res) {
   // convert the two values to floats and add them together
