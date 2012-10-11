@@ -15,22 +15,35 @@ process.env.NODE_ENV = 'test';
 beforeEach(function (done) {
 
   function clearDB() {
-    for (var i in mongoose.connection.collections) {
-      mongoose.connection.collections[i].remove(function() {});
+    for (var i = 0; i < mongoose.connection.collections.length; i++) {
+      mongoose.connection.collections[i].remove();
     }
     return done();
   }
 
-  if (mongoose.connection.readyState === 0) {
+  function reconnect() {
     mongoose.connect(config.db.test, function (err) {
       if (err) {
         throw err;
       }
       return clearDB();
     });
-  } else {
-    return clearDB();
   }
+
+  function checkState() {
+    switch (mongoose.connection.readyState) {
+    case 0:
+      reconnect();
+      break;
+    case 1:
+      clearDB();
+      break;
+    default:
+      process.nextTick(checkState);
+    }
+  }
+
+  checkState();
 });
 
 
