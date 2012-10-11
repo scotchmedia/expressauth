@@ -15,7 +15,7 @@ process.env.NODE_ENV = 'test';
 beforeEach(function (done) {
 
   function clearDB() {
-    for (var i = 0; i < mongoose.connection.collections.length; i++) {
+    for (var i in mongoose.connection.collections) {
       mongoose.connection.collections[i].remove();
     }
     return done();
