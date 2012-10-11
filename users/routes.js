@@ -15,5 +15,8 @@ exports.signup = function (req, res) {
   req.check('password', 'Please enter a password with a length between 4 and 34 digits').len(4, 34);
   req.check('givenName', 'Please enter your first name').len(1);
   req.check('familyName', 'Please enter your last name').len(1);
-  res.redirect('/account');
+  // If the form is valid craete a new user
+  User.create(req.body, function (err, user) {
+    res.redirect('/account');
+  });
 };
