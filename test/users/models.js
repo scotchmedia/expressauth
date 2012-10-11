@@ -1,6 +1,6 @@
 'use strict';
 
-// import the moongoose helper utilites
+// import the moongoose helper utilities
 var utils = require('../utils');
 var should = require('should');
 // import our User mongoose model
@@ -46,7 +46,7 @@ describe('Users: models', function () {
   });
 
   describe('#hashPassoword()', function () {
-    it('should return a hashed password asyncchronously', function (done) {
+    it('should return a hashed password asynchronously', function (done) {
 
       var password = 'secret';
 

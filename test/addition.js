@@ -1,6 +1,6 @@
 'use strict';
 
-// import the moongoose helper utilites
+// import the moongoose helper utilities
 var utils = require('./utils');
 var request = require('supertest');
 var should = require('should');
