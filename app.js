@@ -12,7 +12,7 @@ var mongoose = require('mongoose');
 var path = require('path');
 var config = require('./config');
 
-var app = express();
+var app = exports.app = express();
 
 app.configure(function () {
   app.set('port', process.env.PORT || 3000);
