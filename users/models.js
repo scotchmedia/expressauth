@@ -23,7 +23,8 @@ var userSchema = new Schema({
     givenName   : String,
     familyName  : String
   },
-  emails: [emailSchema]
+  emails: [emailSchema],
+  passwordHash: String
 });
 
 userSchema.statics.hashPassword = function (passwordRaw, fn) {
