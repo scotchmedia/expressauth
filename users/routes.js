@@ -16,7 +16,24 @@ exports.signup = function (req, res) {
   req.check('givenName', 'Please enter your first name').len(1);
   req.check('familyName', 'Please enter your last name').len(1);
   // If the form is valid craete a new user
-  User.create(req.body, function (err, user) {
-    res.redirect('/account');
+  var newUser = {
+    name: {
+      givenName: req.body.givenName,
+      familyName: req.body.familyName
+    },
+    emails: [
+      {
+        value: req.body.email
+      }
+    ]
+  };
+  // hash password
+  User.hashPassword(req.body.password, function (err, passwordHash) {
+    // update attributes
+    newUser.passwordHash = passwordHash;
+    // Create new user
+    User.create(newUser, function (err, user) {
+      return res.redirect('/account');
+    });
   });
 };
