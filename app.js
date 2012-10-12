@@ -6,10 +6,12 @@
 
 var express = require('express');
 var routes = require('./routes');
+var auth = require('./auth/routes');
 var users = require('./users/routes');
 var http = require('http');
 var mongoose = require('mongoose');
 var path = require('path');
+var passport = require('passport');
 var config = require('./config');
 var expressValidator = require('express-validator');
 
@@ -33,6 +35,10 @@ app.configure(function () {
   // add the express-validator middleware. 
   // Important: This must come before the app.router middleware
   app.use(expressValidator);
+  // Add passwport support
+  // Important: This must come before the app.router middleware
+  app.use(passport.initialize());
+  app.use(passport.session());
   app.use(app.router);
   app.use(express.static(path.join(__dirname, 'public')));
 });
@@ -43,6 +49,7 @@ app.configure('development', function () {
 
 app.get('/', routes.index);
 app.post('/signup', users.signup);
+app.post('/auth/local', auth.local);
 
 app.get('/add/:first/:second', function (req, res) {
   // convert the two values to floats and add them together
