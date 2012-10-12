@@ -12,6 +12,8 @@
     "express-validator": "0.3.x",
     "jade": "*",
     "mongoose": "3.x.x",
+    "passport": "0.1.x",
+    "passport-local": "0.1.x",
     "supervisor": "0.4.x",
     "validator": "0.4.12"
   },
