@@ -58,8 +58,14 @@ describe('Users: routes', function () {
         .expect(302)
         .end(function (err, res) {
           should.not.exist(err);
-          User.find(function (err, u) {
-            u.length.should.equal(1);
+          User.find(function (err, users) {
+            users.length.should.equal(1);
+            var u = users[0];
+            // Make sure the user values match up.
+            u.name.givenName.should.equal(post.givenName);
+            u.name.familyName.should.equal(post.familyName);
+            u.emails[0].value.should.equal(post.email);
+            should.exist(u.passwordHash);
             done();
           });
         });
