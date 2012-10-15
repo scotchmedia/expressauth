@@ -24,7 +24,8 @@ var userSchema = new Schema({
     familyName  : String
   },
   emails: [emailSchema],
-  passwordHash: String
+  passwordHash: String,
+  roles: Array
 });
 
 userSchema.statics.hashPassword = function (passwordRaw, fn) {
@@ -41,6 +42,19 @@ userSchema.statics.hashPassword = function (passwordRaw, fn) {
 userSchema.statics.comparePasswordAndHash = function (password, passwordHash, fn) {
   // compare the password to the passwordHash
   bcrypt.compare(password, passwordHash, fn);
+};
+
+userSchema.methods.hasRole = function (role) {
+  for (var i = 0; i < this.roles.length; i++) {
+    if (this.roles[i] === role) {
+      // if the role that we are chekign matches the 'role' we are
+      // looking for return true
+      return true;
+    }
+    
+  };
+  // if the role does not match return false
+  return false;
 };
 
 // Export the User model

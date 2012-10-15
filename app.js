@@ -6,6 +6,7 @@
 
 var express = require('express');
 var routes = require('./routes');
+var admin = require('./routes/admin');
 var auth = require('./auth/routes');
 var users = require('./users/routes');
 var http = require('http');
@@ -14,6 +15,8 @@ var path = require('path');
 var passport = require('passport');
 var config = require('./config');
 var expressValidator = require('express-validator');
+
+var ensureAdmin = require('./auth/middlewares').ensureAuthenticated;
 
 var app = exports.app = express();
 
@@ -50,6 +53,7 @@ app.configure('development', function () {
 app.get('/', routes.index);
 app.post('/signup', users.signup);
 app.post('/auth/local', auth.local);
+app.get('/admin', ensureAdmin, admin.index);
 
 app.get('/add/:first/:second', function (req, res) {
   // convert the two values to floats and add them together
