@@ -22,7 +22,7 @@ passport.serializeUser(function (user, fn) {
 // deserializeUser is passed a function that will return the user the
 // belongs to an id.
 passport.deserializeUser(function (id, fn) {
-  User.findOne({id: id}, function (err, user) {
+  User.findOne({_id: id}, function (err, user) {
     fn(err, user);
   });
 });
