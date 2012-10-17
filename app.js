@@ -54,6 +54,8 @@ app.get('/', routes.index);
 app.post('/signup', users.signup);
 app.post('/auth/local', auth.local);
 app.get('/admin', ensureAdmin, admin.index);
+app.post('/password_rest', users.paswordRest);
+app.get('/password_rest/:token', users.paswordTokenCheck);
 
 app.get('/add/:first/:second', function (req, res) {
   // convert the two values to floats and add them together
