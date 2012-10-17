@@ -8,10 +8,12 @@
   },
   "dependencies": {
     "bcrypt": "0.7.x",
+    "email-templates": "0.0.5",
     "express": "3.0.0rc4",
     "express-validator": "0.3.x",
     "jade": "*",
     "mongoose": "3.x.x",
+    "nodemailer": "0.3.x",
     "passport": "0.1.x",
     "passport-local": "0.1.x",
     "supervisor": "0.4.x",
