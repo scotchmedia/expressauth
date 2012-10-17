@@ -5,6 +5,7 @@ var utils = require('../utils');
 var should = require('should');
 // import our User mongoose model
 var User = require('../../users/models').User;
+var UserToken = require('../../users/models').UserToken;
 
 
 describe('Users: models', function () {
@@ -126,4 +127,19 @@ describe('Users: models', function () {
     });
   });
 
+  describe('UserToken', function () {
+
+    describe('#new', function () {
+      var userId = '000000000000000000000001';
+      UserToken.new(userId, function (err, userToken) {
+        // Confirm that that an error does not exist
+        should.not.exist(err);
+        should.exist(userToken.token);
+        // the userId is a Schema.ObjectId so to test against our string
+        // we need to convert it to a string
+        userToken.userId.toString().should.equal(userId);
+      });
+    });
+
+  });
 });
