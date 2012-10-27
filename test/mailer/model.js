@@ -30,7 +30,7 @@ describe('mailer: models', function () {
         email: 'one@example.com',
         subject: 'Password reset',
         name: 'Forgetful User',
-        resetUrl: 'http;//localhost:3000/password_rest/000000000001|afdaevdae353'
+        resetUrl: 'http;//localhost:3000/password_reset/000000000001|afdaevdae353'
       };
       mailer.sendOne('password_rest', locals, function (err, responseStatus, html, text) {
         should.not.exist(err);
