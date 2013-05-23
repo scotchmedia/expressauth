@@ -46,7 +46,7 @@ describe('Users: models', function () {
     });
   });
 
-  describe('#hashPassoword()', function () {
+  describe('#hashPassword()', function () {
     it('should return a hashed password asynchronously', function (done) {
 
       var password = 'secret';
